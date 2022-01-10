@@ -1,0 +1,12 @@
+header{
+    align-items: center;
+    background-color: #333;
+    height: 4rem;
+    display: flex;
+    padding: 0 4rem;
+}
+
+header .logo{
+    font-size: 2rem;
+    color: antiquewhite;
+}
