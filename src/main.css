@@ -3,10 +3,10 @@
     margin: 0;
     padding: 0;
     font-family: "Inter";
-    font-weight: 500;
 }
 
- body {
-     color: #333;
-     background-color: antiquewhite;
+body {
+    background-color: antiquewhite;
+    color: #333;
+    font-weight: 500;
  }
