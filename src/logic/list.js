@@ -1,17 +1,27 @@
 class List {
 
-    constructor(name,todo) {
+    constructor(name,task) {
         this.name= name;
-        this.todos = [];
-        if (todo) this.todos.push(todo);
+        this.tasks = [];
+        if (task) this.tasks.push(task);
     }
 
     getName = () => this.name;
     setName = (newName) => this.name = newName;
 
-    getTodos = () => this.todos;
-    addTodo =(todo) => this.todos.push(todo);
-    deleteTodo = (rank) => this.todos.splice(rank,1);
+    gettasks = () => this.tasks;
+    addTask =(task) => {
+        this.tasks.push(task);
+        task.parent = this;
+    }
+    deleteTask= (oldTask) => {
+        let rank=0;
+        this.tasks.forEach( (task) =>{
+            if (oldTask ===  task) this.tasks.splice(rank, 1);
+            rank++;
+        });
+    }
 }
+
 
 export default List;

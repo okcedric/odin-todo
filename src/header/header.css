@@ -4,10 +4,11 @@ header{
     height: 4rem;
     display: flex;
     padding: 0 4rem;
+    z-index: 6;
 }
 
 header .logo{
     font-size: 2rem;
-    color: antiquewhite;
+    color: white;
     font-weight: 900;
 }

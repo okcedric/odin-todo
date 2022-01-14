@@ -1,4 +1,4 @@
-class Todo {
+class Task {
 
     constructor(title, description, dueDate, notes)  {
         this.title = title;
@@ -6,7 +6,6 @@ class Todo {
         this.dueDate = dueDate;
         this.notes = notes;
         this.priority = "normal";
-        this.status = "todo";
     }
 
     getTitle = () => this.title;
@@ -26,8 +25,9 @@ class Todo {
     
     getStatus = () => this.status;
     setStatus = (newStatus) => this.status = newStatus;
-
+    getParent = () => this.parent;
+    setParent = (obj) => this.parent = obj;
 
 }
 
-export default Todo;
+export default Task;

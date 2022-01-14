@@ -18,8 +18,8 @@ export default function renderLists(data){
        
     });
 
-   
     let addListButton = create('button',"Add new list", 'add-list');
     append(container,addListButton );
+ 
     return container;
 }
