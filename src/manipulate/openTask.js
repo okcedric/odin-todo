@@ -12,8 +12,8 @@ export default function openTask(task){
    
     let listID = document.querySelector('.open-list').getAttribute('data-id');
 
-    if(task.priority=='high') card.classList.add('high');
-    if(task.priority=='low') card.classList.add('low');
+    card.classList.add(task.priority);
+    
 
     let title = create("textarea",task.getTitle(),"title");
 
@@ -25,7 +25,10 @@ export default function openTask(task){
     let dueDate = create("div",task.getDueDate(),"date");
     let notes = create('textarea','','notes');
     if (task.getNotes()) notes.innerText = task.getNotes();
-    let priority = create('div', `${task.getPriority()} priority`, 'priority');
+    let priority = create('div', '', 'priority');
+    let lowDot = create('div', '', 'low-dot');
+    let normalDot = create('div', '', 'normal-dot');
+    let highDot = create('div', '', 'high-dot');
     let textDiv = create('div','','text-div');
     let cardContent = create('div','','card-content');
     let divClose = create('div','','div-close');
@@ -35,14 +38,19 @@ export default function openTask(task){
     let deleteButton = create('button',"delete","delete");
   
 
+    normalDot.classList.add('dot');
+    lowDot.classList.add('dot');
+    highDot.classList.add('dot');
     
-
     append(textDiv,dueDate,title,desc,notes);
     append(cardContent,textDiv);
     append(buttons,saveButton,deleteButton);
+    append(priority,lowDot,normalDot,highDot);
     append(divClose,priority,close);
     append(card,divClose,cardContent,buttons);
-
+    
+    let activeDot = priority.querySelector(`.${task.priority}-dot`);
+    activeDot.classList.add('active');
     if (!task.getDescription()) {
 
         desc.setAttribute('placeholder', 'Add some details')
@@ -58,12 +66,48 @@ export default function openTask(task){
         title.setAttribute('placeholder', 'Title')
     } 
 
+    let prioritySelection = task.priority;
+
+
+    lowDot.onclick = () => {
+        if(lowDot.classList.contains('active')) return;
+        prioritySelection = 'low';
+        let active =  priority.querySelector('.active');
+        active.classList.remove('active');
+        lowDot.classList.add('active');
+        if (card.classList.contains('normal')) card.classList.remove('normal');
+        if (card.classList.contains('high')) card.classList.remove('high');
+        card.classList.add('low');
+    }
+    normalDot.onclick = () => {
+        if(normalDot.classList.contains('active')) return;
+        prioritySelection = 'normal';
+        let active = priority.querySelector('.active');
+            active.classList.remove('active');
+        normalDot.classList.add('active');
+        if (card.classList.contains('low')) card.classList.remove('low');
+        if (card.classList.contains('high')) card.classList.remove('high');
+        card.classList.add('normal');
+        
+    }
+    highDot.onclick = () => {
+        if (highDot.classList.contains('active')) return;
+        prioritySelection = 'high';
+        let active = priority.querySelector('.active');
+        active.classList.remove('active');
+        highDot.classList.add('active');
+        if (card.classList.contains('normal')) card.classList.remove('normal');
+        if (card.classList.contains('low')) card.classList.remove('low');
+        card.classList.add('high');
+
+    }
     
     close.onclick= () => {
         closeOverlay();
         closeList();
         openList(data, listID);
     }
+
     overlay.onclick = () => {
         closeOverlay();
         closeList();
@@ -73,10 +117,11 @@ export default function openTask(task){
         let newTitle = title.value;
         let newDesc = desc.value;
         let newNotes = notes.value;
-
+        closeOverlay();
        task.setTitle(newTitle);
        task.setDescription(newDesc);
        task.setNotes(newNotes);
+        task.priority = prioritySelection;
        closeList();
        openList(data, listID);
        closeOverlay();

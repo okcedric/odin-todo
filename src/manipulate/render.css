@@ -32,13 +32,63 @@ h1{
     font-size: 2rem;
 }
 
-.puce{
-    border: #33333333 solid 2px;
+.puce, .dot{
     border-radius: 50%;
     margin-right: .4rem;
     height: 2rem;
     width: 2rem;
 }
+
+.low-dot{
+  background-color:   #008b8b33   
+}
+
+.high-dot{
+    background-color: #ff634733;
+}
+
+.normal-dot{
+    background-color: #33333366;
+}
+
+.dot.active{
+    border: #333 solid 2px;
+}
+
+.low-dot.active{
+    background-color:   #008b8b;   
+}
+
+.high-dot.active{
+    background-color: #ff6347;
+}
+
+.normal-dot.active{
+    background-color: #333333;
+}
+
+.dot:hover{
+    border: #333 solid 2px;
+}
+.high-dot:hover::after, .high-dot.active::after{
+    position: absolute;
+    content: 'high';
+    transform: translate(-1rem, 2rem);
+}
+.low-dot:hover::after, .low-dot.active::after{
+    position: absolute;
+    content: 'low';
+    transform: translate(-1rem, 2rem);
+}
+
+.normal-dot:hover::after, .normal-dot.active::after{
+    position: absolute;
+    content: 'normal';
+    transform: translate(-1rem, 2rem);
+}
+
+
+
 
 .header{
     align-items: center;
@@ -165,7 +215,7 @@ button.save{
     margin: 0;
     padding: 1rem 2rem 1rem 1rem;
     background-color: transparent;
-    color: #eee;
+    color: #333
 
 }
 
@@ -173,11 +223,13 @@ button.save{
     align-items: center;
     display: flex;
     justify-content: space-between;
-    background-color: #333;
+    background-color: #33333333;
     border-radius: 1rem 1rem 0 0;
-    color: #eee;
+
 }
 .div-close .priority {
+    display: flex;
+    gap: 1rem;
     padding: 3rem;
     text-transform: uppercase;
     font-weight: bold;
@@ -285,7 +337,6 @@ textarea:hover{
     justify-content: space-between;
     flex: 1;
     padding: 3rem;
-    border-top: 1px solid #333;
     font-size: 2em;
     width: 100%;
   
