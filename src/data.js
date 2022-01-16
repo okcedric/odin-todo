@@ -1,4 +1,4 @@
-import Task from "./logic/todo";
+import Task from "./logic/task";
 import List from "./logic/list";
 
 let task1 = new Task(

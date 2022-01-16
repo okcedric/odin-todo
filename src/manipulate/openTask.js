@@ -124,7 +124,6 @@ export default function openTask(task){
         task.priority = prioritySelection;
        closeList();
        openList(data, listID);
-       closeOverlay();
     }
 
 

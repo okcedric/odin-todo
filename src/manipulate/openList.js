@@ -1,7 +1,8 @@
 import create from "./create";
 import append from "./append";
 import openTask from "./openTask";
-import Task from "../logic/todo";
+import Task from "../logic/task";
+import events from "../events";
 
 
 
@@ -12,24 +13,25 @@ export default function openList(data,id){
     }
 
 
-    let ul = create('ul');
     let list = data[id];
+    let ul = create('ul');
+    let addtaskButton = create('button', "Add task +", 'add-task');
     let listComponent = associatedDOMlist(id);
     let chevron = listComponent.querySelector('.chevron');
     let main = document.querySelector('main');
-   
+    
     if (list.tasks.length == 0) {
         let empty = create('div','This list is empty',"empty");
         append(ul,empty);
     } else {
-
+        
         list.tasks.forEach(task => {
+            let li = create('li');
             let header = create('div', '', 'header');
             let puce = create('span', '', 'puce');
             let title = create('h2', task.getTitle(), 'title');
-            append(header, puce, title);
             let desc = create('p', task.getDescription(), 'description');
-            let li = create('li');
+            append(header, puce, title);
             if (task.priority=='high') li.classList.add('high');
             if (task.priority=='low') li.classList.add('low');
             
@@ -46,16 +48,23 @@ export default function openList(data,id){
     listComponent.classList.add('open-list');
     chevron.textContent = "-";
     append(listComponent, ul);
-    let addtaskButton = create('button', "Add task +", 'add-task');
-
-    addtaskButton.onclick = function (){
-        let newTask = new Task('New task','','','');
-        list.addTask(newTask);
-        let overlay= openTask(newTask);
-        append(main,overlay);
-        let title = document.querySelector('.overlay .title');
-        title.select();
-    }
     append(ul, addtaskButton);
+    
+    
+    let listTitle = document.querySelector('.open-list .list-title');
+
+    if (listTitle){
+        listTitle.onclick = (e) => {
+            if(listComponent.classList.contains('open-list')){
+                events.editNameList(list);
+                e.stopPropagation();
+            }
+        }
+    }
+    
+    addtaskButton.onclick = function () {
+        events.addNewTask(list);
+    }
+
     return ul
 }

@@ -11,5 +11,5 @@ let main = document.createElement('main');
 append(body,header,main);
 let container = render(data);
 append(main,container);
-events();
+events.focusList();
 openList(data, 0);

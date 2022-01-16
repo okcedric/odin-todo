@@ -10,7 +10,7 @@ export default function renderLists(data){
         let listHeader = create('div',"","list-header");
         let listComponent= create('div',"","list");
         listComponent.setAttribute('data-id',i);
-        let listTitle = create('h1',list.name);
+        let listTitle = create('h1',list.name,'list-title');
         append(listHeader,listTitle,chevron);      
         append(listComponent,listHeader)
         append(container,listComponent);  

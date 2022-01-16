@@ -15,7 +15,7 @@ li:hover{
     background-color: #33333333;
     transition: background-color 400ms, padding-left 200ms linear;
     padding-left: 2rem;
-    cursor: zoom-in;
+    cursor: pointer;
 }
 
 
@@ -52,7 +52,7 @@ h1{
 }
 
 .dot.active{
-    border: #333 solid 2px;
+    border: #eee solid 2px;
 }
 
 .low-dot.active{
@@ -68,9 +68,9 @@ h1{
 }
 
 .dot:hover{
-    border: #333 solid 2px;
+    border: #eee solid 2px;
 }
-.high-dot:hover::after, .high-dot.active::after{
+/* .high-dot:hover::after, .high-dot.active::after{
     position: absolute;
     content: 'high';
     transform: translate(-1rem, 2rem);
@@ -86,7 +86,7 @@ h1{
     content: 'normal';
     transform: translate(-1rem, 2rem);
 }
-
+ */
 
 
 
@@ -297,7 +297,7 @@ textarea:hover{
      z-index: 3;
      cursor: pointer;
     }
-    .overlay .title{
+    .overlay .title,.listName{
     display: block;
     font-size: 1.618em;
     font-weight: bold;
