@@ -1,53 +1,50 @@
 import create from "./create";
 import append from "./append";
 import closeOverlay from "./closeOverlay";
-import data from "../data";
 import openList from "./openList";
 import closeList from "./closeList"
+import createOverlay from "./createOverlay";
+import renderLists from "./render";
+import data from "../data";
 
 export default function openTask(task){
-    let overlay = create("div","","overlay");
-    let card = create('div','','card');
     let list = task.parent;
-   
-    let listID = document.querySelector('.open-list').getAttribute('data-id');
-
-    card.classList.add(task.priority);
     
-
+    
     let title = create("textarea",task.getTitle(),"title");
-
     title.setAttribute('value', task.getTitle());
-   
+    
     let desc = create("textarea",task.getDescription(),"description");
     
     desc.setAttribute('value', task.getDescription())
     let dueDate = create("div",task.getDueDate(),"date");
-    let notes = create('textarea','','notes');
-    if (task.getNotes()) notes.innerText = task.getNotes();
-    let priority = create('div', '', 'priority');
+    let notes = create('textarea',task.getNotes(),'notes');
     let lowDot = create('div', '', 'low-dot');
     let normalDot = create('div', '', 'normal-dot');
     let highDot = create('div', '', 'high-dot');
-    let textDiv = create('div','','text-div');
-    let cardContent = create('div','','card-content');
-    let divClose = create('div','','div-close');
-    let close = create('button',"×",'close');
-    let buttons = create('div','','button-rack');
-    let saveButton = create('button',"Save changes","save");
-    let deleteButton = create('button',"delete","delete");
+    
+    
+    let overlay = createOverlay(list);
+    let card = overlay.querySelector('.card');
+    card.classList.add(task.priority)
+    let priority = card.querySelector('.priority')
+    let textDiv = card.querySelector('.text-div');
+
+
+
+    let saveButton = overlay.querySelector('.save');
+    let deleteButton = overlay.querySelector('.delete');
   
 
     normalDot.classList.add('dot');
     lowDot.classList.add('dot');
     highDot.classList.add('dot');
     
-    append(textDiv,dueDate,title,desc,notes);
-    append(cardContent,textDiv);
-    append(buttons,saveButton,deleteButton);
+    
     append(priority,lowDot,normalDot,highDot);
-    append(divClose,priority,close);
-    append(card,divClose,cardContent,buttons);
+    append(textDiv,dueDate,title,desc,notes);
+
+   
     
     let activeDot = priority.querySelector(`.${task.priority}-dot`);
     activeDot.classList.add('active');
@@ -102,17 +99,7 @@ export default function openTask(task){
 
     }
     
-    close.onclick= () => {
-        closeOverlay();
-        closeList();
-        openList(data, listID);
-    }
-
-    overlay.onclick = () => {
-        closeOverlay();
-        closeList();
-        openList(data, listID);
-    }
+    
     saveButton.onclick=() => {
         let newTitle = title.value;
         let newDesc = desc.value;
@@ -123,7 +110,7 @@ export default function openTask(task){
        task.setNotes(newNotes);
         task.priority = prioritySelection;
        closeList();
-       openList(data, listID);
+       openList(list);
     }
 
 
@@ -131,16 +118,16 @@ export default function openTask(task){
     deleteButton.onclick = () => {
         list.deleteTask(task);
         closeOverlay();
-        openTask(task);
         closeList();
-        openList(data,listID);
+        openList(list);
+
     };
 
 
-    overlay.appendChild(card);
+    
 
 
-    card.onclick= (e) => e.stopPropagation();
+    
   
  
     

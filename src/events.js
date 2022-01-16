@@ -1,31 +1,36 @@
-import openList from "./manipulate/openList";
-import data  from "./data";
-import closeLists from "./manipulate/closeList";
+import create from "./manipulate/create";
 import Task from "./logic/task";
 import openTask from "./manipulate/openTask";
 import append from "./manipulate/append";
-import create from "./manipulate/create";
+import createOverlay from './manipulate/createOverlay';
+import openList from './manipulate/openList';
+import closeList from './manipulate/closeList';
+import renderLists from "./manipulate/render";
+import closeOverlay from "./manipulate/closeOverlay"
+import data from './data'
+import List from "./logic/list";
 
 let events = (function () {
 
 
-    function focusList() {
-       let headers = document.querySelectorAll('.list .list-header');
-       headers.forEach(header => {
-           let list = header.parentElement;
-           header.onclick = function () {
-               let id = list.getAttribute('data-id');
-               let ul = list.querySelector('ul');
-               closeLists();
-               if (!ul) openList(data, id) 
-           }
-       });
+    function focusList(list) {
+        let alreadyOpenList = document.querySelector('.open-list');
+
+        if(alreadyOpenList){
+            let openID = alreadyOpenList.getAttribute('data-id');
+            let clickedID= list.id;
+            closeList();
+            if (clickedID != openID) openList(list)
+             
+        } else {
+            openList(list);
+            
+        }
+        
     }
 
     function addNewTask(list) {
         let main = document.querySelector('main');
-    
-        
             let newTask = new Task('New task', '', '', '');
             list.addTask(newTask);
             let overlay = openTask(newTask);
@@ -37,13 +42,35 @@ let events = (function () {
 
     function editNameList(list) {
         let main = document.querySelector('main');
-        let name = list.name; 
-        let card = create('div', '', 'card')
-        let overlay = create('div', '', 'overlay');
-        let listName = create('textarea', name, 'listName');
-        append(card, listName);
-        append(overlay, card);
+        let overlay = createOverlay(list);
+        let textDiv = overlay.querySelector('.text-div');
+        let title = create("textarea", list.getName(), "title");
+        append(textDiv, title)
         append(main, overlay);
+        let saveButton = overlay.querySelector('.save');
+        let deleteButton = overlay.querySelector('.delete');
+        title.select();
+        saveButton.onclick = () => {
+            let newName = title.value;
+            let id = list.id;
+            let listComponent = document.querySelector(`[data-id ='${id}']`);
+        
+            list.setName(newName);
+            let container = renderLists(data);
+            let main = document.querySelector('main')
+            append(main, container)
+            openList(list)
+        }
+        
+        
+        
+        deleteButton.onclick = () => {
+            let id = list.id;
+            data.splice(id, 1);
+            let container = renderLists(data);
+            let main = document.querySelector('main')
+            append(main,container)
+        };
     }
 
     return {

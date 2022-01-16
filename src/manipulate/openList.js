@@ -1,19 +1,19 @@
 import create from "./create";
 import append from "./append";
 import openTask from "./openTask";
-import Task from "../logic/task";
 import events from "../events";
 
 
 
-export default function openList(data,id){
+export default function openList(list){
     function associatedDOMlist(id) {
         let listsNode = document.querySelectorAll(`.list`);
         return listsNode[id];
     }
 
+    let id = list.id;
 
-    let list = data[id];
+
     let ul = create('ul');
     let addtaskButton = create('button', "Add task +", 'add-task');
     let listComponent = associatedDOMlist(id);
