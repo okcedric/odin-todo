@@ -6,23 +6,22 @@ import createOverlay from './manipulate/createOverlay';
 import openList from './manipulate/openList';
 import closeList from './manipulate/closeList';
 import renderLists from "./manipulate/render";
-import closeOverlay from "./manipulate/closeOverlay"
 import data from './data'
-import List from "./logic/list";
 
 let events = (function () {
 
 
     function focusList(list) {
         let alreadyOpenList = document.querySelector('.open-list');
-
+        
         if(alreadyOpenList){
+            alreadyOpenList
             let openID = alreadyOpenList.getAttribute('data-id');
             let clickedID= list.id;
             closeList();
             if (clickedID != openID) openList(list)
              
-        } else {
+        } else {    
             openList(list);
             
         }
@@ -52,9 +51,6 @@ let events = (function () {
         title.select();
         saveButton.onclick = () => {
             let newName = title.value;
-            let id = list.id;
-            let listComponent = document.querySelector(`[data-id ='${id}']`);
-        
             list.setName(newName);
             let container = renderLists(data);
             let main = document.querySelector('main')

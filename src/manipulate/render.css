@@ -3,6 +3,10 @@
 }
 
 li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
     list-style: none;
     margin-bottom: 1rem;
     padding: 1rem;
@@ -12,10 +16,29 @@ li{
 }
 
 li:hover{
-    background-color: #33333333;
-    transition: background-color 400ms, padding-left 200ms linear;
+    transition: border-left 200ms ease, padding-left 200ms ease;
     padding-left: 2rem;
     cursor: pointer;
+    border-left: 4px solid #33333333;
+}
+
+.icons {
+    display: flex;
+}
+
+.icons button{
+    margin: 0;
+    border-radius: 50%;
+    padding: 1rem;
+    transition: color 200ms ease;
+    color: #33333333;
+}
+
+.icons button.deleteIcon:hover {
+    color: #ff6347;
+}
+.icons button.doneIcon:hover {
+    color: green;
 }
 
 
@@ -34,9 +57,8 @@ h1{
 
 .puce, .dot{
     border-radius: 50%;
-    margin-right: .4rem;
-    height: 2rem;
-    width: 2rem;
+    height: 1rem;
+    width: 1rem;
 }
 
 .low-dot{
@@ -93,6 +115,7 @@ h1{
 .header{
     align-items: center;
     display: flex;
+    gap:1rem
 
 }
 
@@ -132,16 +155,7 @@ button.add-list:hover {
     
 }
 
-button.delete {
-    color: #ff6347;
-    background-color: transparent;
-    transition: color 400ms ease , background-color 400ms ease;
-}
-button.delete:hover {
-    background-color: #ff6347;
-    color: #333;
 
-}
 
 .list-header{
     align-items: center;
@@ -177,38 +191,76 @@ button.delete:hover {
     background-color: #ff634733;
 }
 
-li.high:hover{
-    background-color: #ff634733;
-}
 
 .low .puce{
     background-color: #008b8b33
 }
 
-li.low:hover{
-    background-color: #008b8b33;
-}
-.card.high .div-close{
-    background-color: #ff634733;
-    color: #000;
-}
-.card.low .div-close{
-    background-color: #008b8b33;
-    color: #000;
-}
-.card.high .close{
-    color: #000;
-}
-.card.low .close{
-    color: #000;
-}
 
 
 
-button.save{
+
+button.done{
+    background-color: #EEE;
+    color: #10ca10;
+}
+button.done:hover{
+    background-color: #10ca10;
+    color: #eee;
+}
+
+button.save:hover{
     background-color: #333;
     color: #eee;
 }
+button.save{
+    background-color: #eee;
+    color: #333;
+}
+
+button.delete {
+    color: #ff6347;
+    background-color: transparent;
+    transition: color 400ms ease , background-color 400ms ease;
+}
+button.delete:hover {
+    background-color: #ff6347;
+    color: #333;
+
+}
+
+
+.done li { 
+    background-color: #333;
+    color: #EEE;
+}
+ul.done{
+    margin-top: 4rem;
+}
+
+ul.done .title{
+    text-decoration: line-through;
+}
+
+ul.done .puce{
+    display: none;
+    background-color: #333;
+    border: solid #EEE 2px;
+}
+ul.done .puce::after{
+    position: absolute;
+    content: '✓';
+    transform: translate(50%);
+    font-size: 1.272rem;
+    font-weight: 900;
+}
+
+ul.done .title{
+    text-decoration: line-through;
+}
+
+
+
 
 .close{
     font-size: 2rem;
@@ -246,11 +298,7 @@ button.save{
     transition: all 400ms linear;
 }
 
-.text-div .title:hover::after,.text-div .date:hover::after,.text-div .description:hover::after{
-    color: #33333366;
-    font-size: 1rem;
-    content: " edit";
-}
+
 
 input, textarea{
     background-color: #EEE;
@@ -308,15 +356,7 @@ textarea:hover{
     font-size: 2rem;
 }
 
-.overlay .description::before{
-    content: 'Description : ';
-    color: #33333366;
-}
-.overlay .notes::before{
-    content: 'Notes : ';
-    color: #33333366;
-}
-    
+  
 .card{
     display: flex;
     flex-direction: column;
@@ -340,6 +380,36 @@ textarea:hover{
     font-size: 2em;
     width: 100%;
   
+}
+
+
+
+.card.high .div-close{
+    background-color: #ff634733;
+    color: #000;
+}
+.card.low .div-close{
+    background-color: #008b8b33;
+    color: #000;
+}
+.card.high .close{
+    color: #000;
+}
+.card.low .close{
+    color: #000;
+}
+
+.card.done .div-close{
+    background-color: #333;
+    color: #eee;
+}
+.card.done {
+     background-color: #333;
+    color: #eee;
+}
+
+.card.done .close{
+    color: #eee;
 }
 
 .list-header .description{

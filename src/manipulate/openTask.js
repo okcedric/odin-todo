@@ -4,21 +4,21 @@ import closeOverlay from "./closeOverlay";
 import openList from "./openList";
 import closeList from "./closeList"
 import createOverlay from "./createOverlay";
-import renderLists from "./render";
-import data from "../data";
+import updateList from "./updateList";
+
 
 export default function openTask(task){
     let list = task.parent;
-    
-    
-    let title = create("textarea",task.getTitle(),"title");
+    let status = task.getStatus();
+    let textZone = (status =='todo') ? 'textarea' : 'p';
+    let title = create(textZone,task.getTitle(),"title");
     title.setAttribute('value', task.getTitle());
     
-    let desc = create("textarea",task.getDescription(),"description");
     
+    let desc = create(textZone, task.getDescription(), "description");
     desc.setAttribute('value', task.getDescription())
     let dueDate = create("div",task.getDueDate(),"date");
-    let notes = create('textarea',task.getNotes(),'notes');
+    let notes = create(textZone,task.getNotes(),'notes');
     let lowDot = create('div', '', 'low-dot');
     let normalDot = create('div', '', 'normal-dot');
     let highDot = create('div', '', 'high-dot');
@@ -26,14 +26,17 @@ export default function openTask(task){
     
     let overlay = createOverlay(list);
     let card = overlay.querySelector('.card');
-    card.classList.add(task.priority)
-    let priority = card.querySelector('.priority')
+    card.classList.add(task.priority);
+    let priority = card.querySelector('.priority');
     let textDiv = card.querySelector('.text-div');
 
 
 
     let saveButton = overlay.querySelector('.save');
     let deleteButton = overlay.querySelector('.delete');
+    let buttonRack = deleteButton.parentElement;
+    let doneButton = create('button','mark as done','done');
+    let todoButton = create('button', 'mark as todo', 'todo');
   
 
     normalDot.classList.add('dot');
@@ -43,6 +46,12 @@ export default function openTask(task){
     
     append(priority,lowDot,normalDot,highDot);
     append(textDiv,dueDate,title,desc,notes);
+    if (task.getStatus() == 'todo') {
+        append(buttonRack,doneButton);
+    }else {
+        append(buttonRack, todoButton);
+    }
+
 
    
     
@@ -64,6 +73,8 @@ export default function openTask(task){
     } 
 
     let prioritySelection = task.priority;
+
+    if(task.getStatus()==='done') card.classList.add('done');  
 
 
     lowDot.onclick = () => {
@@ -109,27 +120,35 @@ export default function openTask(task){
        task.setDescription(newDesc);
        task.setNotes(newNotes);
         task.priority = prioritySelection;
-       closeList();
-       openList(list);
+       updateList(list);
     }
 
-
+    if (status =='done') {
+        saveButton.remove();
+        lowDot.remove();
+        highDot.remove();
+        normalDot.remove();
+    }
 
     deleteButton.onclick = () => {
         list.deleteTask(task);
         closeOverlay();
-        closeList();
-        openList(list);
+        updateList(list);
 
     };
 
+    doneButton.onclick = () => {
+        closeOverlay();
+        task.setStatus('done');
+        updateList(list);
+    }
 
+    todoButton.onclick = () => {
+        closeOverlay();
+        task.setStatus('todo');
+        updateList(list);
+    }
     
-
-
-    
-  
- 
     
     return overlay;
 

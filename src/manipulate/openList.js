@@ -2,6 +2,8 @@ import create from "./create";
 import append from "./append";
 import openTask from "./openTask";
 import events from "../events";
+import updateList from "./updateList";
+import closeLists from "./closeList";
 
 
 
@@ -13,42 +15,66 @@ export default function openList(list){
 
     let id = list.id;
 
-
-    let ul = create('ul');
-    let addtaskButton = create('button', "Add task +", 'add-task');
+    let tasks = create('div','','tasks');
+    let todo = create('ul','','todo');
+    let done = create('ul','','done');
+    let addTaskButton = create('button', "Add task +", 'add-task');
     let listComponent = associatedDOMlist(id);
     let chevron = listComponent.querySelector('.chevron');
     let main = document.querySelector('main');
+
+    append(tasks, todo, done, addTaskButton)
+    append(listComponent, tasks);
     
     if (list.tasks.length == 0) {
         let empty = create('div','This list is empty',"empty");
-        append(ul,empty);
+        append(todo,empty);
     } else {
         
         list.tasks.forEach(task => {
+
             let li = create('li');
             let header = create('div', '', 'header');
             let puce = create('span', '', 'puce');
             let title = create('h2', task.getTitle(), 'title');
             let desc = create('p', task.getDescription(), 'description');
-            append(header, puce, title);
-            if (task.priority=='high') li.classList.add('high');
-            if (task.priority=='low') li.classList.add('low');
+            let deleteIcon = create('button','×','deleteIcon');
+            let doneIcon = create('button','✓','doneIcon');
+            let icons = create('div','','icons');
+            append(header, puce, title,desc);
+            li.classList.add(task.getPriority());
+            let status = task.getStatus();
+        
+            let ul = document.querySelector(`.${status}`);
+
+           if (status=='todo') append(icons, doneIcon, deleteIcon);
             
-            append(li, header, desc);
+            append(li, header,icons); 
+
             append(ul, li);
             
             li.onclick = function (){
                 let overlay = openTask(task);
                 append(main,overlay)
             }
+
+            deleteIcon.onclick = (e) => {
+                e.stopPropagation();
+                list.deleteTask(task);
+                updateList(list);
+            };
+
+            doneIcon.onclick = (e) => {
+                e.stopPropagation();
+                task.setStatus('done');
+                updateList(list);
+            };
         });
     }
     
     listComponent.classList.add('open-list');
     chevron.textContent = "-";
-    append(listComponent, ul);
-    append(ul, addtaskButton);
+    
     
     
     let listTitle = document.querySelector('.open-list .list-title');
@@ -62,9 +88,9 @@ export default function openList(list){
         }
     }
     
-    addtaskButton.onclick = function () {
+    addTaskButton.onclick = function () {
         events.addNewTask(list);
     }
 
-    return ul
+    return tasks
 }

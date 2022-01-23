@@ -6,6 +6,7 @@ class Task {
         this.dueDate = dueDate;
         this.notes = notes;
         this.priority = "normal";
+        this.status = 'todo';
     }
 
     getTitle = () => this.title;
@@ -27,6 +28,7 @@ class Task {
     setStatus = (newStatus) => this.status = newStatus;
     getParent = () => this.parent;
     setParent = (obj) => this.parent = obj;
+
 
 }
 
