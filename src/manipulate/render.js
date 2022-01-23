@@ -15,8 +15,12 @@ export default function renderLists(data){
         let listHeader = create('div',"","list-header");
         listComponent.setAttribute('data-id',i);
         let listTitle = create('h1',list.name,'list-title');
-        append(listHeader,listTitle,chevron);      
-        append(listComponent,listHeader)
+        console.log(list.getTodoCount());
+        let taskCounter = create('p', `${list.getTodoCount()}/${list.tasks.length}`, 'taskCounter');
+        let div = create('div','','flex');
+        append(div, listTitle, taskCounter)
+        append(listHeader,div, chevron);      
+        append(listComponent, listHeader);
         append(container,listComponent);  
         list.id= i;
         

@@ -12,7 +12,7 @@ li{
     padding: 1rem;
     border: 1px solid #33333333;
     cursor: pointer;
-    
+    border-radius: 8px;
 }
 
 li:hover{
@@ -24,6 +24,16 @@ li:hover{
 
 .icons {
     display: flex;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    gap : .5rem
+}
+
+.open-list .taskCounter{
+    display: none;
 }
 
 .icons button{
@@ -57,8 +67,8 @@ h1{
 
 .puce, .dot{
     border-radius: 50%;
-    height: 1rem;
-    width: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 .low-dot{
@@ -209,11 +219,12 @@ button.done:hover{
     color: #eee;
 }
 
-button.save:hover{
+button.save{
+    border: 1px solid #333 ;
     background-color: #333;
     color: #eee;
 }
-button.save{
+button.save:hover{
     background-color: #eee;
     color: #333;
 }
@@ -229,7 +240,13 @@ button.delete:hover {
 
 }
 
+.description{
+    color: #33333366;
+}
 
+.done .header .description{
+    display: none;
+}
 .done li { 
     background-color: #333;
     color: #EEE;

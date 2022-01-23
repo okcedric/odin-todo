@@ -21,6 +21,8 @@ class List {
             rank++;
         });
     }
+    getTodoCount = () => this.tasks.filter(task => task.getStatus() ==='done').length;
+    
 }
 
 

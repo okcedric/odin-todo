@@ -2,10 +2,7 @@ import create from "./create";
 import append from "./append";
 import openTask from "./openTask";
 import events from "../events";
-import updateList from "./updateList";
-import closeLists from "./closeList";
-
-
+import refresh from "./refresh";
 
 export default function openList(list){
     function associatedDOMlist(id) {
@@ -61,13 +58,13 @@ export default function openList(list){
             deleteIcon.onclick = (e) => {
                 e.stopPropagation();
                 list.deleteTask(task);
-                updateList(list);
+                refresh();
             };
 
             doneIcon.onclick = (e) => {
                 e.stopPropagation();
                 task.setStatus('done');
-                updateList(list);
+                refresh();
             };
         });
     }

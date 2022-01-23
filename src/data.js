@@ -2,20 +2,20 @@ import Task from "./logic/task";
 import List from "./logic/list";
 
 let task1 = new Task(
-    "This is a dummy task", 
-    "You can edit it, or delete it if you want ", 
+    "Call Muriel", 
+    "To get her advice on the new design", 
     "13/01/22"
     );
 
-let task2 = new Task(
+let task3 = new Task(
     "Get to the grocery store",
     "Get all the ingredient for making Osso-Buco except flour ",
     "13/01/22"
 );
 
-let task3 = new Task(
+let task2 = new Task(
     "Send the newsletter",
-    "Send the Polar bear newsletter  ",
+    "The January newsletter  ",
     "13/01/22"
 );
 
@@ -27,8 +27,8 @@ let task4 = new Task(
 
 
 
-let defaultList = new List("Example list");
-let secondList = new List('Second List');
+let defaultList = new List("Work");
+let secondList = new List('Personal');
 defaultList.addTask(task1);
 defaultList.addTask(task2);
 task2.setPriority('high');

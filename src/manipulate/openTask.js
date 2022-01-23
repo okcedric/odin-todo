@@ -1,10 +1,8 @@
 import create from "./create";
 import append from "./append";
 import closeOverlay from "./closeOverlay";
-import openList from "./openList";
-import closeList from "./closeList"
 import createOverlay from "./createOverlay";
-import updateList from "./updateList";
+import refresh from "./refresh";
 
 
 export default function openTask(task){
@@ -35,7 +33,6 @@ export default function openTask(task){
     let saveButton = overlay.querySelector('.save');
     let deleteButton = overlay.querySelector('.delete');
     let buttonRack = deleteButton.parentElement;
-    let doneButton = create('button','mark as done','done');
     let todoButton = create('button', 'mark as todo', 'todo');
   
 
@@ -46,9 +43,7 @@ export default function openTask(task){
     
     append(priority,lowDot,normalDot,highDot);
     append(textDiv,dueDate,title,desc,notes);
-    if (task.getStatus() == 'todo') {
-        append(buttonRack,doneButton);
-    }else {
+    if (task.getStatus() == 'done') {
         append(buttonRack, todoButton);
     }
 
@@ -120,7 +115,7 @@ export default function openTask(task){
        task.setDescription(newDesc);
        task.setNotes(newNotes);
         task.priority = prioritySelection;
-       updateList(list);
+       refresh();  
     }
 
     if (status =='done') {
@@ -133,20 +128,15 @@ export default function openTask(task){
     deleteButton.onclick = () => {
         list.deleteTask(task);
         closeOverlay();
-        updateList(list);
-
+        refresh();
+        
     };
-
-    doneButton.onclick = () => {
-        closeOverlay();
-        task.setStatus('done');
-        updateList(list);
-    }
-
+    
+    
     todoButton.onclick = () => {
         closeOverlay();
         task.setStatus('todo');
-        updateList(list);
+        refresh();
     }
     
     
