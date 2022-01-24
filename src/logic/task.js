@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 class Task {
 
     constructor(title, description, dueDate, notes)  {
@@ -15,8 +17,8 @@ class Task {
     getDescription = () => this.description;
     setDescription = (newDescription) => this.description = newDescription;
 
-    getDueDate = () => this.dueDate;
-    setDueDate = (newDueDate) => this.dueDate = newDueDate;
+    getDate = () => format(this.dueDate,'EEEE, MMMM d yyyy');
+    setDate = (newDueDate) => this.dueDate = newDueDate;
 
     getNotes = () => this.notes;
     setNotes = (newNotes) => this.notes = newNotes;

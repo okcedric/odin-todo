@@ -15,7 +15,7 @@ export default function openTask(task){
     
     let desc = create(textZone, task.getDescription(), "description");
     desc.setAttribute('value', task.getDescription())
-    let dueDate = create("div",task.getDueDate(),"date");
+    let dueDate = create("div",task.getDate(),"date");
     let notes = create(textZone,task.getNotes(),'notes');
     let lowDot = create('div', '', 'low-dot');
     let normalDot = create('div', '', 'normal-dot');

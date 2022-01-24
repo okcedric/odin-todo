@@ -34,7 +34,7 @@ export default function openList(list){
             let header = create('div', '', 'header');
             let puce = create('span', '', 'puce');
             let title = create('h2', task.getTitle(), 'title');
-            let desc = create('p', task.getDescription(), 'description');
+            let desc = create('p', task.getDate(), 'description');
             let deleteIcon = create('button','×','deleteIcon');
             let doneIcon = create('button','✓','doneIcon');
             let icons = create('div','','icons');

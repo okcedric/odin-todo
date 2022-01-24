@@ -33,7 +33,10 @@ li:hover{
 }
 
 .open-list .taskCounter{
-    display: none;
+    color: #33333366;
+}
+.open-list .list-title {
+    cursor: text;
 }
 
 .icons button{
