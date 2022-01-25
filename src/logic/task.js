@@ -1,7 +1,6 @@
-import { format } from 'date-fns';
+import {DateTime} from  'luxon';
 
 class Task {
-
     constructor(title, description, dueDate, notes)  {
         this.title = title;
         this.description = description;
@@ -17,7 +16,8 @@ class Task {
     getDescription = () => this.description;
     setDescription = (newDescription) => this.description = newDescription;
 
-    getDate = () => format(this.dueDate,'EEEE, MMMM d yyyy');
+    getDate = () => this.dueDate.toLocaleString(DateTime.DATE_FULL);
+    
     setDate = (newDueDate) => this.dueDate = newDueDate;
 
     getNotes = () => this.notes;

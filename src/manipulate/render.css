@@ -39,20 +39,6 @@ li:hover{
     cursor: text;
 }
 
-.icons button{
-    margin: 0;
-    border-radius: 50%;
-    padding: 1rem;
-    transition: color 200ms ease;
-    color: #33333333;
-}
-
-.icons button.deleteIcon:hover {
-    color: #ff6347;
-}
-.icons button.doneIcon:hover {
-    color: green;
-}
 
 
 .title {
@@ -327,12 +313,20 @@ input, textarea{
 
 }
 
-textarea:hover{
-    outline:  #33333333 solid 1px;
+textarea:focus-visible{
+    outline-width: 0;
+    background-color: #fff;
 }
+/* textarea:hover{
+    outline:  #33333333 solid 1px;
+} */
 
-.date {
-    font-size : 1.272rem
+input.date {
+    font-size : 1.272rem;
+    min-width: 0;
+}
+input.date{
+    outline: none;
 }
 
 .notes {

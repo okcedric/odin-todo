@@ -3,24 +3,28 @@ import append from "./append";
 import closeOverlay from "./closeOverlay";
 import createOverlay from "./createOverlay";
 import refresh from "./refresh";
+import { DateTime } from "luxon";
 
 
 export default function openTask(task){
     let list = task.parent;
     let status = task.getStatus();
     let textZone = (status =='todo') ? 'textarea' : 'p';
-    let title = create(textZone,task.getTitle(),"title");
-    title.setAttribute('value', task.getTitle());
+    let title = create(textZone, task.getTitle(),"title");
+    
     
     
     let desc = create(textZone, task.getDescription(), "description");
     desc.setAttribute('value', task.getDescription())
-    let dueDate = create("div",task.getDate(),"date");
+    let dueDate = create("input",'',"date");
     let notes = create(textZone,task.getNotes(),'notes');
     let lowDot = create('div', '', 'low-dot');
     let normalDot = create('div', '', 'normal-dot');
     let highDot = create('div', '', 'high-dot');
-    
+    dueDate.setAttribute('type','date');
+    let isoDate = task.dueDate ? task.dueDate.toISODate() : DateTime.now().plus({day:1}).toISODate();
+    dueDate.setAttribute('value', isoDate);
+
     
     let overlay = createOverlay(list);
     let card = overlay.querySelector('.card');
@@ -110,11 +114,14 @@ export default function openTask(task){
         let newTitle = title.value;
         let newDesc = desc.value;
         let newNotes = notes.value;
+        let newDate = dueDate.value;
         closeOverlay();
        task.setTitle(newTitle);
        task.setDescription(newDesc);
        task.setNotes(newNotes);
-        task.priority = prioritySelection;
+        task.setPriority(prioritySelection);
+        task.setDate(DateTime.fromISO(newDate));
+
        refresh();  
     }
 
