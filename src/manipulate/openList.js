@@ -4,6 +4,7 @@ import append from "./append";
 import openTask from "./openTask";
 import events from "../events";
 import refresh from "./refresh";
+import { DateTime } from 'luxon';
 
 
 export default function openList(list){
@@ -36,6 +37,10 @@ export default function openList(list){
             let puce = create('span', '', 'puce');
             let title = create('h2', task.getTitle(), 'title');
             let date = create('p', task.getDate(), 'date');
+            let now = DateTime.now();
+            
+            if (task.getDate() && task.isOverdue()) date.classList.add('overdue')
+            
             let icons = create('div','','icons');
             let deleteIcon = create('span','delete','deleteIcon');
             let doneIcon = create('span','done','doneIcon');

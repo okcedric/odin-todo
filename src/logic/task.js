@@ -21,6 +21,10 @@ class Task {
     }
     
     setDate = (newDueDate) => this.dueDate = newDueDate;
+    isOverdue = () => {
+        let now = DateTime.now();
+        return (this.dueDate < now );
+    }
 
     getNotes = () => this.notes;
     setNotes = (newNotes) => this.notes = newNotes;
