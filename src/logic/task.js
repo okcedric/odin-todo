@@ -16,7 +16,9 @@ class Task {
     getDescription = () => this.description;
     setDescription = (newDescription) => this.description = newDescription;
 
-    getDate = () => this.dueDate.toLocaleString(DateTime.DATE_FULL);
+    getDate = () => {
+        if (this.dueDate.isValid) return this.dueDate.toLocaleString(DateTime.DATE_FULL);
+    }
     
     setDate = (newDueDate) => this.dueDate = newDueDate;
 

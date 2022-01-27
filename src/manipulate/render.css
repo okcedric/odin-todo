@@ -229,7 +229,7 @@ button.delete:hover {
 
 }
 
-.description{
+.open-list .header .date{
     color: #33333366;
 }
 
@@ -426,9 +426,6 @@ input.date{
     color: #eee;
 }
 
-.list-header .description{
-    color: tomato;
-}
 
 .empty{
     padding: 0 0 4rem 1rem ;
