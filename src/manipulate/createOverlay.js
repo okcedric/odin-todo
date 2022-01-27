@@ -32,11 +32,9 @@ export default function createOverlay(list) {
         e.stopPropagation();
     }
     
-    overlay.onclick = () => {
+    overlay.onclick = (e) => {
         closeOverlay();
-        closeLists();
-        openList(list);
-        renderLists(data);
+        e.stopPropagation();
     }
 
     return overlay

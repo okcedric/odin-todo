@@ -39,18 +39,16 @@ export default function openList(list){
             let icons = create('div','','icons');
             let deleteIcon = create('span','delete','deleteIcon');
             let doneIcon = create('span','done','doneIcon');
-            let scheduleIcon = create('span','schedule','scheduleIcon');
 
             deleteIcon.classList.add('material-icons');
             doneIcon.classList.add('material-icons');
-            scheduleIcon.classList.add('material-icons');
             append(header, puce, title,desc);
             li.classList.add(task.getPriority());
             let status = task.getStatus();
             
             let ul = document.querySelector(`.${status}`);
             
-            if (status=='todo') append(icons, scheduleIcon, doneIcon, deleteIcon);
+            if (status=='todo') append(icons, doneIcon, deleteIcon);
             
             append(li, header,icons); 
             
