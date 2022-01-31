@@ -9,7 +9,8 @@ export default function refresh() {
     let main = document.querySelector('main');
     append(main, container);
     if (list) {
+        console.log(data);
         let id = list.getAttribute('data-id');
-        openList(data[id]);
+        if(data[id]) openList(data[id]);
     }
 }

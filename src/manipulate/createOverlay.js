@@ -1,10 +1,7 @@
 import create from "./create";
 import append from "./append";
-import data from "../data";
-import renderLists from "./render";
 import closeOverlay from "./closeOverlay";
-import closeLists from "./closeList";
-import openList from "./openList";
+
 
 export default function createOverlay(list) {
     let overlay = create("div", "", "overlay");

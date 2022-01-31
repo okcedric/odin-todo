@@ -7,6 +7,7 @@ import openList from './manipulate/openList';
 import closeList from './manipulate/closeList';
 import renderLists from "./manipulate/render";
 import data from './data'
+import refresh from "./manipulate/refresh";
 
 let events = (function () {
 
@@ -52,10 +53,7 @@ let events = (function () {
         saveButton.onclick = () => {
             let newName = title.value;
             list.setName(newName);
-            let container = renderLists(data);
-            let main = document.querySelector('main')
-            append(main, container)
-            openList(list)
+            refresh();
         }
         
         
@@ -63,9 +61,7 @@ let events = (function () {
         deleteButton.onclick = () => {
             let id = list.id;
             data.splice(id, 1);
-            let container = renderLists(data);
-            let main = document.querySelector('main')
-            append(main,container)
+            refresh();
         };
     }
 
