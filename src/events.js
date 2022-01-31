@@ -8,6 +8,7 @@ import closeList from './manipulate/closeList';
 import renderLists from "./manipulate/render";
 import data from './data'
 import refresh from "./manipulate/refresh";
+import save from "./save";
 
 let events = (function () {
 
@@ -54,6 +55,7 @@ let events = (function () {
             let newName = title.value;
             list.setName(newName);
             refresh();
+            save();
         }
         
         
@@ -62,6 +64,7 @@ let events = (function () {
             let id = list.id;
             data.splice(id, 1);
             refresh();
+            save();
         };
     }
 
