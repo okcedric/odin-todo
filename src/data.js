@@ -1,6 +1,7 @@
 import Task from "./logic/task";
 import List from "./logic/list";
 import { DateTime } from "luxon";
+import closeLists from "./manipulate/closeList";
 
 
 let task1 = new Task(
@@ -39,20 +40,20 @@ task3.setPriority('low');
 secondList.addTask(task4);
 
 
-let dummyData = {
-    '0': {
-        'list':'work',
-        'tasks': {
-            '0': {
+let dummyData = 
+    [{
+        'name':'Work',
+        'tasks': [{
                 'title': 'Send the newsletter',
                 'description': 'The January newsletter',
                 'date': {
                     'year': "2022",
                     'month': '3',
                     'day': '10'
-                }
+                },
+                'priority' : 'high'
             },
-            '1': {
+            {
                 'title': 'Call Mélanie',
                 'description': 'To get her advice on the new design',
                 'date': {
@@ -61,41 +62,64 @@ let dummyData = {
                     'day': '29'
                 }
             }
-        }
+        ]
+        
     },
-    '1': {
-        'list':'home',
-        'tasks': {
-            '0': {
+    {
+        'name':'Home',
+        'tasks': [{
                 'title': 'Get to the grocery store',
                 'description': 'Get all the ingredient for making Osso-Buco except flour ',
                 'date': {
                     'year': "2022",
                     'month': '1',
                     'day': '25'
-                }
+                },
+                'priority':'low'
             },
-            '1': {
+            {
                 'title': 'Buy some flowers for Liliane',
                 'description': 'It\'s her birthday',
                 'date': {
                     'year': "2022",
                     'month': '5',
                     'day': '13'
-                }
+                },
+                'status' : 'done'
             }
-        }
-    },
+        ]
+    }]
+
+
+if(!localStorage)localStorage.setItem('data', JSON.stringify(dummyData));
+
+
+function toData(storage) {
+    
+    let array = JSON.parse(storage.getItem('data'));
+    let data = [];
+    
+    array.forEach(jList => {
+        let list = new List(jList.name);
+        jList.tasks.forEach(jTask=> {
+            let task = new Task(
+                jTask.title,
+                jTask.desc,
+                DateTime.fromObject( jTask.date)
+            );
+            task.setParent(list);
+            if(jTask.priority) task.setPriority(jTask.priority);
+            if(jTask.notes) task.setNotes(jTask.notes);
+            if(jTask.status) task.setStatus(jTask.status);
+            list.tasks.push(task);
+        })
+        data.push(list);
+    });
+    return data;
 }
 
-localStorage.setItem('data', JSON.stringify(dummyData));
+let data = toData(localStorage);
 
-let data = [defaultList, secondList];
-
-
-let storage = JSON.parse(localStorage.getItem('data'));
-
-console.log(storage[0]);
-
+console.log(data);
 
 export default data;

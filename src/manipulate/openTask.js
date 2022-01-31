@@ -4,6 +4,7 @@ import closeOverlay from "./closeOverlay";
 import createOverlay from "./createOverlay";
 import refresh from "./refresh";
 import { DateTime } from "luxon";
+import save from "../save";
 
 
 export default function openTask(task){
@@ -121,8 +122,8 @@ export default function openTask(task){
        task.setNotes(newNotes);
         task.setPriority(prioritySelection);
         task.setDate(DateTime.fromISO(newDate));
-
-       refresh();  
+       refresh();
+       save();
     }
 
     if (status =='done') {
@@ -133,10 +134,11 @@ export default function openTask(task){
     }
 
     deleteButton.onclick = () => {
+        console.log(task);
         list.deleteTask(task);
         closeOverlay();
         refresh();
-        
+        save();
     };
     
     
@@ -144,6 +146,7 @@ export default function openTask(task){
         closeOverlay();
         task.setStatus('todo');
         refresh();
+        save();
     }
     
     

@@ -5,6 +5,7 @@ import openTask from "./openTask";
 import events from "../events";
 import refresh from "./refresh";
 import { DateTime } from 'luxon';
+import save from '../save';
 
 
 export default function openList(list){
@@ -68,12 +69,14 @@ export default function openList(list){
                 e.stopPropagation();
                 list.deleteTask(task);
                 refresh();
+                save();
             };
             
             doneIcon.onclick = (e) => {
                 e.stopPropagation();
                 task.setStatus('done');
                 refresh();
+                save();
             };
         });
     }
