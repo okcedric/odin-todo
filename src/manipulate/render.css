@@ -57,8 +57,8 @@ h1{
 
 .puce, .dot{
     border-radius: 50%;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1em;
+    width: 1rem;
 }
 
 .low-dot{
@@ -300,7 +300,6 @@ ul.done .title{
     padding: 1rem;
     text-transform: uppercase;
     font-weight: bold;
-
 }
 
 .text-div {
