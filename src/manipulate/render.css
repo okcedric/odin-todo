@@ -236,6 +236,12 @@ button.delete:hover {
 .open-list .header .date.overdue {
     color: #ff6347;
 }
+
+.open-list .done .header .date.overdue {
+    color: transparent;
+}
+
+
 .done .header .description{
     display: none;
 }
