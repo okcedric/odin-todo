@@ -297,7 +297,7 @@ ul.done .title{
 .div-close .priority {
     display: flex;
     gap: 1rem;
-    padding: 3rem;
+    padding: 1rem;
     text-transform: uppercase;
     font-weight: bold;
 
