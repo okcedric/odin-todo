@@ -1,6 +1,7 @@
 import create from "./create";
 import append from "./append";
 import closeOverlay from "./closeOverlay";
+import refresh from "./refresh";
 
 
 export default function createOverlay(list) {
@@ -26,11 +27,13 @@ export default function createOverlay(list) {
     
     close.onclick = (e) => {
         closeOverlay();
+        refresh();
         e.stopPropagation();
     }
     
     overlay.onclick = (e) => {
         closeOverlay();
+        refresh();
         e.stopPropagation();
     }
 

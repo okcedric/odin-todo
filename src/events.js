@@ -5,7 +5,6 @@ import append from "./manipulate/append";
 import createOverlay from './manipulate/createOverlay';
 import openList from './manipulate/openList';
 import closeList from './manipulate/closeList';
-import renderLists from "./manipulate/render";
 import data from './data'
 import refresh from "./manipulate/refresh";
 import save from "./save";

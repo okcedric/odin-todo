@@ -1,8 +1,6 @@
 import Task from "./logic/task";
 import List from "./logic/list";
 import { DateTime } from "luxon";
-import closeLists from "./manipulate/closeList";
-
 
 let task1 = new Task(
     "Call Muriel", 
@@ -90,7 +88,6 @@ let dummyData =
         ]
     }]
 
-
 if(!localStorage)localStorage.setItem('data', JSON.stringify(dummyData));
 
 
@@ -119,7 +116,5 @@ function toData(storage) {
 }
 
 let data = toData(localStorage);
-
-console.log(data);
 
 export default data;
