@@ -358,6 +358,7 @@ input.date{
 }
 
 .overlay{
+    display: flex;
      align-items: center;
      position: fixed;
      justify-content: center;
@@ -384,7 +385,6 @@ input.date{
 .card{
     display: flex;
     flex-direction: column;
-    margin: 4rem;
     width: calc(100% - 8rem);
     min-height: 90vh;
     background-color: #EEE;
@@ -400,8 +400,7 @@ input.date{
     display: flex;
     justify-content: space-between;
     flex: 1;
-    padding: 3rem;
-    font-size: 2em;
+    padding: 1rem;
     width: 100%;
   
 }
