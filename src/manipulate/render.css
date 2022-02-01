@@ -357,19 +357,10 @@ input.date{
 }
 
 .overlay{
-    display: f;
-     align-items: center;
-     position: fixed;
-     justify-content: center;
-     bottom:0;
-     left:0;
-     background-color: #333333DD;
-     width: 100vw;
-     min-height: 100vh;
-     z-index: 3;
-     cursor: pointer;
-    }
-    .overlay .title,.listName{
+    display: flex;
+}
+
+.overlay .title,.listName{
     display: block;
     font-weight: bold;
     font-size: 1.618rem;
