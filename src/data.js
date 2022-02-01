@@ -88,22 +88,20 @@ let dummyData =
         ]
     }]
 
-if(!localStorage)localStorage.setItem('data', JSON.stringify(dummyData));
-
-
-function toData(storage) {
     
-    let array = JSON.parse(storage.getItem('data'));
-    let data = [];
     
-    array.forEach(jList => {
-        let list = new List(jList.name);
-        jList.tasks.forEach(jTask=> {
-            let task = new Task(
+    function toData(array) {
+        console.log(array)
+        let data = [];
+        
+        array.forEach(jList => {
+            let list = new List(jList.name);
+            jList.tasks.forEach(jTask=> {
+                let task = new Task(
                 jTask.title,
                 jTask.desc,
                 DateTime.fromObject( jTask.date)
-            );
+                );
             task.setParent(list);
             if(jTask.priority) task.setPriority(jTask.priority);
             if(jTask.notes) task.setNotes(jTask.notes);
@@ -115,6 +113,7 @@ function toData(storage) {
     return data;
 }
 
-let data = toData(localStorage);
+let stored = localStorage && localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : dummyData;
+let data = toData(stored);
 
 export default data;

@@ -23,5 +23,7 @@ function toJSON(data) {
 }
 
 export default function save() {
-    localStorage.setItem('data', toJSON(data))
+    if(localStorage) {
+        localStorage.setItem('data', toJSON(data))
+    }
 }
