@@ -1,0 +1,31 @@
+
+.material-icons {
+    font-family: 'Material Icons';
+    margin: 0;
+    border-radius: 50%;
+    padding: 0 .5rem  ;
+    color: #33333300;
+}
+
+.deleteIcon{
+    transition: color 1000ms ease;
+}
+.doneIcon {
+    transition: color 200ms ease;
+}
+
+
+li:hover .material-icons {
+    color: #33333366;
+}
+
+li:hover .deleteIcon:hover {
+    color: #ff6347;
+}
+li:hover .doneIcon:hover {
+    color: green;
+}
+
+li:hover .scheduleIcon:hover{
+    color: #333333;
+}
