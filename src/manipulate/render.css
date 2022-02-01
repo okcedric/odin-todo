@@ -358,7 +358,7 @@ input.date{
 }
 
 .overlay{
-    display: flex;
+    display: f;
      align-items: center;
      position: fixed;
      justify-content: center;
@@ -393,6 +393,7 @@ input.date{
     border-radius: 1rem;
     cursor: default;
 }
+
 
 
 .card-content{
